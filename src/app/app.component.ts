@@ -39,6 +39,8 @@ import { NotificationsComponent } from './notifications/modules/components/notif
 export class AppComponent {
   // title = 'AppName';
   showNotifications: boolean = false;
+  // Modo Oscuro
+  darkModeEnabled = false;
   //variables
   navbarMenu: NavbarItem[] = [
     {
@@ -85,7 +87,7 @@ export class AppComponent {
               label: 'Pagos',
               routerLink: '/invoices/stadistics/2',
             },
-            
+
           ],
         },
 
@@ -158,7 +160,7 @@ export class AppComponent {
         {
           label: 'Gastos',
           subMenu: [
-            { label: 'Lista de gastos', routerLink: 'expenses/gastos' },
+            { label: 'Listado de gastos', routerLink: 'expenses/gastos' },
             {
               label: 'Categorias de gastos',
               routerLink: 'expenses/gastos/categorias',
@@ -172,7 +174,7 @@ export class AppComponent {
         {
           label: 'Cargos',
           subMenu: [
-            { label: 'Lista de cargos', routerLink: 'expenses/cargos' },
+            { label: 'Listado de cargos', routerLink: 'expenses/cargos' },
             {
               label: 'Categorias de cargos',
               routerLink: 'expenses/cargos/categorias',
@@ -182,7 +184,7 @@ export class AppComponent {
         {
           label: 'Periodo',
           subMenu: [
-            { label: 'Lista de periodos', routerLink: 'expenses/periodo' },
+            { label: 'Listado de periodos', routerLink: 'expenses/periodo' },
             { label: 'Histórico de expensas', routerLink: 'expenses/expenses' },
             {
               label: 'Reporte de expensas',
@@ -303,6 +305,33 @@ export class AppComponent {
       ],
     },
     {
+      label: 'Propietarios',
+      routerLink: 'users',
+      sidebarMenu: [
+        {
+          label: 'Reporte Propietarios',
+          routerLink: '/users/owner/reports',
+        },
+        {
+          label: 'Propietarios',
+          subMenu: [
+            {label: 'Listado de Propietarios', routerLink: '/users/owner/list'},
+            {label: 'Cargar Propietario', routerLink: '/users/owner/form'},
+            {label: 'Asignar Lote', routerLink: '/users/owner/assign'},
+            {label: 'Cargar Archivo', routerLink: '/users/files/form'},
+            {label: 'Validar Archivos', routerLink: '/users/files/view'},
+          ],
+        },
+        {
+          label: 'Lotes',
+          subMenu: [
+            { label: 'Listado de Lotes', routerLink: '/users/plot/list' },
+            { label: 'Cargar Lote', routerLink: '/users/plot/form' },
+          ],
+        },
+      ]
+    },
+    {
       label: 'Proveedores',
       routerLink: 'inventories/providers',
       sidebarMenu: [
@@ -339,48 +368,8 @@ export class AppComponent {
       routerLink: 'users',
       sidebarMenu: [
         {
-          label: 'Dashboards',
-          subMenu: [
-            {
-              label: 'Reporte Propietarios',
-              routerLink: '/users/owner/reports',
-            },
-            { label: 'Reporte Usuarios', routerLink: '/users/user/reports' },
-          ],
-        },
-        // {
-        //   label: 'Perfil',
-        //   subMenu: [
-        //     {
-        //       label: 'Consultar Perfil',
-        //       routerLink: '/users/profile/detail',
-        //     },
-        //     {
-        //       label: 'Editar Perfil',
-        //       routerLink: '/users/profile/edit',
-        //     },
-        //     {
-        //       label: 'Cambiar contraseña',
-        //       routerLink: '/users/changepassword',
-        //     },
-        //   ],
-        // },
-        {
-          label: 'Propietarios',
-          subMenu: [
-            { label: 'Listado de Propietarios', routerLink: '/users/owner/list' },
-            { label: 'Cargar Propietario', routerLink: '/users/owner/form' },
-            { label: 'Asignar Lote', routerLink: '/users/owner/assign' },
-            { label: 'Cargar Archivo', routerLink: '/users/files/form' },
-            { label: 'Validar Archivos', routerLink: '/users/files/view' },
-          ],
-        },
-        {
-          label: 'Lotes',
-          subMenu: [
-            { label: 'Listado de Lotes', routerLink: '/users/plot/list' },
-            { label: 'Cargar Lote', routerLink: '/users/plot/form' },
-          ],
+          label: 'Reporte Usuarios',
+          routerLink: '/users/user/reports',
         },
         {
           label: 'Usuarios',
@@ -397,7 +386,7 @@ export class AppComponent {
             { label: 'Usuarios por Rol', routerLink: '/users/user/role' },
           ],
         },
-      ],
+        ]
     },
   ];
 
@@ -441,4 +430,14 @@ export class AppComponent {
   onNotificationClick() {
     this.showNotifications = !this.showNotifications;
   }
+
+  //Modo Oscuro
+  toggleDarkMode() {
+    this.darkModeEnabled = !this.darkModeEnabled;
+    if (this.darkModeEnabled) {
+      document.body.classList.add('dark-mode'); // Agrega clase al body
+    } else {
+      document.body.classList.remove('dark-mode'); // Remueve clase del body
+    }
+  }
 }

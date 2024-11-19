@@ -78,6 +78,8 @@ export class OwnerFormComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.id) {
       this.title = "Editar Propietario"
+      this.ownerForm.controls['documentType'].disable();
+      this.ownerForm.controls['documentNumber'].disable();
       this.ownerService.getOwnerById(parseInt(this.id, 10)).subscribe({
         next: (response) => {
           this.owner = {
@@ -127,12 +129,10 @@ export class OwnerFormComponent implements OnInit {
     ),
     documentType: new FormControl('', [Validators.required]),
     cuit: new FormControl('', [
-      Validators.required,
       Validators.pattern('^[0-9]*$'),
       cuitValidator,
     ]),
     bankAccount: new FormControl('', [
-      Validators.required,
       Validators.pattern('^[0-9]*$'),
     ]),
     birthdate: new FormControl('', [
